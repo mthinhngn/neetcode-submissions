@@ -1,18 +1,11 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        
-        hashmap = defaultdict(list)
-        
-        for word in strs:
-            key = "".join(sorted(word))  # "cat" -> "act"
-            hashmap[key].append(word)    # {"act": ["act", "cat"]}
-        
-        return list(hashmap.values())
-        
-        '''
-        sorted to group the char
-        return a list of sorted
-        different list containt different style of sorted
+        res = defaultdict(list)
 
-        return the sorted array
-        '''
+        for sub in strs:
+            count = [0]*26
+            for c in sub:
+                count[ord(c)-ord("a")] += 1
+            
+            res[tuple(count)].append(sub)
+        return list(res.values())
