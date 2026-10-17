@@ -7,9 +7,21 @@
 
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        """ 
+        1. Handle the edge case root in None
+        2. Swap the children
+            Using DFS recursive template
+            Using BFS queue template
+        """
         if not root:
-            return None
+            return
         
-        root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
+        #Swap the children template
+        tmp =  root.left
+        root.left = root.right
+        root.right = tmp
 
+        self.invertTree(root.left)
+        self.invertTree(root.right)
         return root
+
